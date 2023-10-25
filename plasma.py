@@ -56,6 +56,13 @@ class Plasma:
         """
         Hashes the given string; the digest is 128 bits long.
         """
+        salt_arr = {7:"salt", 14: "slat", 21: "salty"}
+        if len(x) < 7:
+            x += salt_arr[7]
+        elif len(x) < 14:
+            x += salt_arr[14]
+        else:
+            x += salt_arr[21]
         hash_val = [19, 34, 26, 90, 45, 78, 39, 89, 178, 20, 12, 210, 160, 145, 50, 233]
         # Determine (the amount of bits the hash is / 2) numbers from 0-255. To make the code more readable, I predetermined the numbers. These numbers determine the digest of a string. 
         ascii_val = [ord(char) for char in x] # Using list comprehension, convert the characters of the string into its number pair in ASCII.
@@ -70,7 +77,7 @@ class Plasma:
         """
         Hashes the given string; the digest is 64 bits long.
         """
-        # Exact same formula as hash_128 only the numbers were manipulated.
+        # Exact same formula as hash_128 only the numbers were manipulated so it could fit into a 64-bit digest.
         hash_val = [17, 87, 65, 54, 92, 254, 156, 100]
         ascii = [ord(char) for char in x]
         for i in ascii:
@@ -82,5 +89,5 @@ class Plasma:
 
 p = Plasma()
 s = input("Input a string of any length: ")
-h = p.hash_64(s)
+h = p.hash_128(s)
 print(f"Your digest is: {h}")
