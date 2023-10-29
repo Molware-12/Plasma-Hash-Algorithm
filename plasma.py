@@ -95,8 +95,8 @@ class Plasma:
 
 
 p = Plasma()
-s = input("Input a string of any length: ")
-s2 = input("Input a string of any length: ")
+s = input("Input a string of any length (64-bits): ")
+s2 = input("Input a string of any length (128-bits): ")
 h = p.hash_64(s)
 h2 = p.hash_128(s2)
 print(f"Your digest 64-bit digest is: {h}\n Your 128-digest is {h2}")
